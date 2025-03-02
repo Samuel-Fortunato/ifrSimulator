@@ -23,6 +23,7 @@ qt_add_qml_module(appifrSimulator
 	RESOURCES
 	RESOURCES attitude_fg.svg
 	QML_FILES Altimeter.qml
+	RESOURCES altimeter_svg.py
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
