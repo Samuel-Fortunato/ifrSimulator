@@ -2,27 +2,49 @@ import QtQuick
 import QtQuick.Controls
 
 Window {
-    width: 500
+    width: 300
     height: 600
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("IFR Simulator")
 
-    AttitudeIndicator {
-        id: horizon
 
-        size: { Math.min( parent.width, parent.height ) }
-        anchors.horizontalCenter: parent.horizontalCenter
 
-        pitch: horizonPitch.value
-    }
+    Column {
+        anchors.fill: parent
 
-    Slider {
-        id: horizonPitch
+        AttitudeIndicator {
+            id: horizon
 
-        width: parent.width
+            size: 300
 
-        from: -1
-        value: 0
-        to: 1
+            pitch: 2 * (stick.y - height/2) / height
+            roll: 360 * (stick.x - width/2) / width
+        }
+
+        Rectangle {
+            width: 300
+            height: 300
+
+            color: "grey"
+
+            MouseArea {
+                anchors.fill: parent
+
+                drag { target: stick; axis: Drag.XAndYAxis; smoothed: false }
+
+                Rectangle {
+                    id: stick
+
+                    width: 30
+                    height: 30
+
+                    x: 150
+                    y: 150
+
+                    color: "black"
+                    radius: width / 2
+                }
+            }
+        }
     }
 }

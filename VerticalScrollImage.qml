@@ -1,26 +1,34 @@
 import QtQuick
 
-Image {
+Item {
     id: root
 
-    required property QtObject frame
-    required source
+    property alias source: image.source
+    property real scroll: 0
 
-    property int center: (frame.height - height) / 2
-    property bool scrollable: (height > frame.height)
-    property int maxScroll: (height - frame.height) / 2
+    clip: true
 
-    function __calculateScrollY() {
-        if (!scrollable) {
-            return center
+    Image {
+        id: image
+
+        required source
+
+        property int center: (root.height - height) / 2
+        property bool scrollable: (height > root.height)
+        property int maxScroll: (height - root.height) / 2 // Maximum pixels to scroll
+
+        function __calculateScrollY() {
+            if (!scrollable) {
+                return center
+            }
+
+            return center + (maxScroll * scroll)
         }
 
-        return center + (maxScroll * pitch)
+        width: root.width
+        height: implicitHeight * (width / implicitWidth) // Maintain aspect ratio
+
+        anchors.horizontalCenter: root.horizontalCenter
+        y: __calculateScrollY()
     }
-
-    anchors.horizontalCenter: frame.horizontalCenter
-    width: frame.width
-    height: implicitHeight * (width / implicitWidth) // Maintain aspect ratio
-
-    y: __calculateScrollY()
 }
