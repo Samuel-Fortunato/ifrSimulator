@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
-<path fill="none" stroke-width="8" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 508 256 C 508 395.175781 395.175781 508 256 508 C 116.824219 508 4 395.175781 4 256 C 4 116.824219 116.824219 4 256 4 C 395.175781 4 508 116.824219 508 256 "/>
+<rect x="-51.2" y="-51.2" width="614.4" height="614.4" fill="rgb(0%, 0%, 0%)" fill-opacity="1"/>
+<path fill="none" stroke-width="16" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 60%)" stroke-opacity="1" stroke-miterlimit="10" d="M 504 256 C 504 392.964844 392.964844 504 256 504 C 119.035156 504 8 392.964844 8 256 C 8 119.035156 119.035156 8 256 8 C 392.964844 8 504 119.035156 504 256 "/>
+<path fill-rule="nonzero" fill="rgb(40%, 40%, 40%)" fill-opacity="1" d="M 504 256 C 504 392.964844 392.964844 504 256 504 C 119.035156 504 8 392.964844 8 256 C 8 119.035156 119.035156 8 256 8 C 392.964844 8 504 119.035156 504 256 "/>
+<path fill="none" stroke-width="16" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0 256 L 0 224 " transform="matrix(1, 0, 0, 1, 256, 256)"/>
 </svg>
