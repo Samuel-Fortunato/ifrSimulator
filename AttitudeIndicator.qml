@@ -3,28 +3,39 @@ import QtQuick
 Item {
     id: root
 
-    property alias size: root.width
     property alias pitch: bg.scroll
     property real roll: 0
+    readonly property int size: { Math.min( width, height ) }
 
     implicitWidth: 100
+    implicitHeight: 100
     width: implicitWidth
-    height: width
-    clip: true
+    height: implicitHeight
 
-    VerticalScrollImage {
-        id: bg
-        source: "attitude_bg.png"
+    Item {
+        id: square_frame
 
-        rotation: -roll
+        width: size
+        height: size
 
-        anchors.fill: parent
-    }
+        anchors.centerIn: parent
 
-    Image {
-        id: fg
-        source: "attitude_fg.svg"
+        clip: true
 
-        anchors.fill: root
+        VerticalScrollImage {
+            id: bg
+            source: "attitude_bg.png"
+
+            rotation: -roll
+
+            anchors.fill: parent
+        }
+
+        Image {
+            id: fg
+            source: "attitude_fg.svg"
+
+            anchors.fill: parent
+        }
     }
 }

@@ -1,29 +1,40 @@
 import QtQuick
-import QtQuick.Controls
 
 Window {
-    width: 300
-    height: 600
+    width: 1000
+    height: 700
     visible: true
     title: qsTr("IFR Simulator")
 
+    Grid {
+        id: panel
 
-
-    Column {
         anchors.fill: parent
+        rows: 2
+        columns: 2
 
         AttitudeIndicator {
             id: horizon
 
-            size: 300
+            width: parent.width / panel.columns
+            height: parent.height / panel.rows
 
-            pitch: 2 * (stick.y - height/2) / height
-            roll: 360 * (stick.x - width/2) / width
+            pitch: 2 * (stick.y - controller.height/2) / controller.height
+            roll: 360 * (stick.x - controller.width/2) / controller.width
+        }
+
+        Altimeter {
+            id: altimeter
+
+            width: parent.width / panel.columns
+            height: parent.height / panel.rows
         }
 
         Rectangle {
-            width: 300
-            height: 300
+            id: controller
+
+            width: parent.width / panel.columns
+            height: parent.height / panel.rows
 
             color: "grey"
 
@@ -38,8 +49,8 @@ Window {
                     width: 30
                     height: 30
 
-                    x: 150
-                    y: 150
+                    x: parent.width / 2
+                    y: parent.height / 2
 
                     color: "black"
                     radius: width / 2
