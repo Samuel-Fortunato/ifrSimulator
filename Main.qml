@@ -19,8 +19,8 @@ Window {
             width: parent.width / panel.columns
             height: parent.height / panel.rows
 
-            pitch: 2 * (stick.y - controller.height/2) / controller.height
-            roll: 360 * (stick.x - controller.width/2) / controller.width
+            pitch: 2 * (stick1.y - controller1.height/2) / controller1.height
+            roll: 360 * (stick1.x - controller1.width/2) / controller1.width
         }
 
         Altimeter {
@@ -28,10 +28,16 @@ Window {
 
             width: parent.width / panel.columns
             height: parent.height / panel.rows
+
+            pressure: 1 + ((stick2.x - controller2.x)*(2))/(controller2.width)
+
+            onPressureChanged: {
+                console.log("Pressure [-1, 1] = " + pressure)
+            }
         }
 
         Rectangle {
-            id: controller
+            id: controller1
 
             width: parent.width / panel.columns
             height: parent.height / panel.rows
@@ -41,10 +47,10 @@ Window {
             MouseArea {
                 anchors.fill: parent
 
-                drag { target: stick; axis: Drag.XAndYAxis; smoothed: false }
+                drag { target: stick1; axis: Drag.XAndYAxis; smoothed: false }
 
                 Rectangle {
-                    id: stick
+                    id: stick1
 
                     width: 30
                     height: 30
@@ -53,6 +59,41 @@ Window {
                     y: parent.height / 2
 
                     color: "black"
+                    radius: width / 2
+                }
+            }
+        }
+
+        Rectangle {
+            id: controller2
+
+            width: parent.width / panel.columns
+            height: parent.height / panel.rows
+
+            color: "grey"
+
+            MouseArea {
+                anchors.fill: parent
+
+                drag {
+                    target: stick2;
+                    axis: Drag.XAndYAxis;
+                    smoothed: false
+
+                    minimumX: x
+                    maximumX: width
+                }
+
+                Rectangle {
+                    id: stick2
+
+                    width: 30
+                    height: 30
+
+                    x: parent.width / 2
+                    y: parent.height / 2
+
+                    color: "red"
                     radius: width / 2
                 }
             }
