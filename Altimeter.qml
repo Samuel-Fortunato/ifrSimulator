@@ -23,7 +23,7 @@ Item {
         clip: true
 
         VerticalScrollImage {
-            source: "altimeter_prss.svg"
+            source: "svg/altimeter/altimeter_prss.svg"
 
             x: (3/4) * square_frame.width
             y: square_frame.height / 2 - height / 2 + square_frame.height / 64
@@ -37,7 +37,7 @@ Item {
         Image {
             id: bg
 
-            source: "altimeter_bg.svg"
+            source: "svg/altimeter/altimeter_bg.svg"
 
             anchors.fill: parent
         }
