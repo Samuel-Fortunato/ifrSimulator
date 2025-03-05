@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 
 Window {
     width: 1000
@@ -29,7 +30,9 @@ Window {
             width: parent.width / panel.columns
             height: parent.height / panel.rows
 
-            pressure: 1 + ((stick2.x - controller2.x)*(2))/(controller2.width)
+            pressure: pressure_slider.value
+
+            hundreds: hundreds_slider.value
         }
 
         Rectangle {
@@ -60,38 +63,28 @@ Window {
             }
         }
 
-        Rectangle {
-            id: controller2
-
+        Column {
             width: parent.width / panel.columns
-            height: parent.height / panel.rows
 
-            color: "grey"
+            Slider {
+                id: pressure_slider
 
-            MouseArea {
-                anchors.fill: parent
+                anchors.left: parent.left
+                anchors.right: parent.right
 
-                drag {
-                    target: stick2;
-                    axis: Drag.XAndYAxis;
-                    smoothed: false
+                from: 932
+                value: 1013
+                to: 1067
+            }
+            Slider {
+                id: hundreds_slider
 
-                    minimumX: x
-                    maximumX: width
-                }
+                anchors.left: parent.left
+                anchors.right: parent.right
 
-                Rectangle {
-                    id: stick2
-
-                    width: 30
-                    height: 30
-
-                    x: parent.width / 2
-                    y: parent.height / 2
-
-                    color: "red"
-                    radius: width / 2
-                }
+                from: 0
+                value: 1.5
+                to: 10
             }
         }
     }

@@ -1,4 +1,5 @@
 import svg
+import os
 
 from altimeter_constants import *
 from color_palette import COLOR_PALETTE as colors
@@ -55,5 +56,9 @@ prss_canvas = svg.SVG(
     elements = prss_element_list,
 )
 
-with open("altimeter_prss.svg", "w") as file:
+output_file = os.environ.get("OUTPUT_FILE", os.getcwd())
+
+with open(output_file, "w") as file:
     file.write(prss_canvas.as_str())
+
+print(f"SVG file saved at: {output_file}")

@@ -124,6 +124,8 @@ bg_text_list = [
 bg_element_list.extend(bg_text_list)
 
 
+
+
 bg_canvas = svg.SVG(
     width = size,
     height = size,

@@ -48,3 +48,8 @@ prss_small_tick_size = window_size_x / 8
 prss_small_spacing_right = window_size_x / 16
 prss_small_tick_width = stroke_w / 8
 prss_small_tick_number = 150
+
+
+
+hand1_width = size / 32
+hand1_tip = size / 16

@@ -3,9 +3,16 @@ import QtQuick
 Item {
     id: root
 
-    property real altitude: 0
-    property real pressure: 1013.2
     readonly property int size: { Math.min( width, height ) }
+    property real pressure: 1013.2
+    property real hundreds: 1.5
+
+    Item {
+        id: prss_const
+
+        readonly property real factor: 2/(932 - 1067)
+        readonly property real bias: 1 + 2 *(932/(1067 - 932))
+    }
 
     implicitWidth: 100
     implicitHeight: 100
@@ -23,7 +30,7 @@ Item {
         clip: true
 
         VerticalScrollImage {
-            source: "svg/altimeter/altimeter_prss.svg"
+            source: "svg/altimeter_prss.svg"
 
             x: (3/4) * square_frame.width
             y: square_frame.height / 2 - height / 2 + square_frame.height / 64
@@ -31,15 +38,24 @@ Item {
             width: square_frame.width * (1/8)
             height: (3/4) * width
 
-            scroll: pressure
+            scroll:  pressure * prss_const.factor + prss_const.bias
         }
 
         Image {
             id: bg
 
-            source: "svg/altimeter/altimeter_bg.svg"
+            source: "svg/altimeter_bg.svg"
 
             anchors.fill: parent
+        }
+
+        Image {
+            id: hand1
+            source: "svg/altimeter_hand1.svg"
+
+            anchors.fill: parent
+
+            rotation: hundreds * (360/10)
         }
     }
 }

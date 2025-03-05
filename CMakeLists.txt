@@ -13,15 +13,16 @@ qt_add_executable(appifrSimulator
     main.cpp
 )
 
-set(SVG_DIRECTORY "svg")
+set(SVG_DIRECTORY svg)
 set(SVG_GENERATOR ${SVG_DIRECTORY}/generator.py)
 set(SVG_RESOURCES
-    ${SVG_DIRECTORY}/altimeter/altimeter_constants.py
+    ${SVG_DIRECTORY}/altimeter_constants.py
     ${SVG_DIRECTORY}/color_palette.py
 )
 set(SVG_SCRIPTS
-    ${SVG_DIRECTORY}/altimeter/altimeter_bg.svg.py
-    ${SVG_DIRECTORY}/altimeter/altimeter_prss.svg.py
+    ${SVG_DIRECTORY}/altimeter_bg.svg.py
+    ${SVG_DIRECTORY}/altimeter_prss.svg.py
+    ${SVG_DIRECTORY}/altimeter_hand1.svg.py
 )
 set(SVG_FILES "")
 
@@ -39,7 +40,7 @@ foreach(SCRIPT ${SVG_SCRIPTS})
     # Add a custom target for each SVG
     add_custom_command(
         OUTPUT ${SVG_FILE}
-        COMMAND ${Python_EXECUTABLE} ${CMAKE_SOURCE_DIR}/${SVG_GENERATOR} -o ${SVG_FILE} ${CMAKE_SOURCE_DIR}/${SCRIPT}
+        COMMAND ${Python_EXECUTABLE} ${CMAKE_SOURCE_DIR}/${SVG_GENERATOR} -o ${CMAKE_SOURCE_DIR}/${SVG_FILE} ${CMAKE_SOURCE_DIR}/${SCRIPT}
         DEPENDS
             ${CMAKE_SOURCE_DIR}/${SVG_GENERATOR}
             ${CMAKE_SOURCE_DIR}/${SVG_RESOURCES}
@@ -52,8 +53,6 @@ foreach(SCRIPT ${SVG_SCRIPTS})
 endforeach()
 
 add_custom_target(generate_svgs ALL DEPENDS ${SVG_FILES})
-
-message(SVG_FILES="${SVG_FILES}")
 
 qt_add_qml_module(appifrSimulator
     URI ifrSimulator
