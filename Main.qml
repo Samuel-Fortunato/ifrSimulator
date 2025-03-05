@@ -30,10 +30,6 @@ Window {
             height: parent.height / panel.rows
 
             pressure: 1 + ((stick2.x - controller2.x)*(2))/(controller2.width)
-
-            onPressureChanged: {
-                console.log("Pressure [-1, 1] = " + pressure)
-            }
         }
 
         Rectangle {

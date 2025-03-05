@@ -5,6 +5,7 @@ project(ifrSimulator VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
+find_package(Python REQUIRED COMPONENTS Interpreter)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -12,19 +13,61 @@ qt_add_executable(appifrSimulator
     main.cpp
 )
 
+set(SVG_GENERATOR generator.py)
+set(SVG_RESOURCES
+    altimeter_constants.py
+    color_palette.py
+)
+
+set(SVG_SCRIPTS
+    altimeter_bg.svg.py
+    altimeter_prss.svg.py
+)
+set(SVG_FILES "")
+
+foreach(SCRIPT ${SVG_SCRIPTS})
+    # Extract filename without extension
+    get_filename_component(NAME_WE ${SCRIPT} NAME_WE)
+
+    # Define output SVG file
+    set(SVG_FILE ${NAME_WE}.svg)
+
+    # Append to resources list
+    list(APPEND SVG_FILES ${SVG_FILE})
+
+    # Add a custom target for each SVG
+    add_custom_command(
+        OUTPUT ${SVG_FILE}
+        COMMAND ${Python_EXECUTABLE} ${CMAKE_SOURCE_DIR}/${SVG_GENERATOR} -o ${CMAKE_SOURCE_DIR}/${SVG_FILE} ${CMAKE_SOURCE_DIR}/${SCRIPT}
+        DEPENDS
+            ${CMAKE_SOURCE_DIR}/${SVG_GENERATOR}
+            ${CMAKE_SOURCE_DIR}/${SVG_RESOURCES}
+            ${CMAKE_SOURCE_DIR}/${SCRIPT}
+        COMMENT "Generating ${SVG_FILE} using ${SCRIPT}"
+        VERBATIM
+    )
+endforeach()
+
+add_custom_target(generate_svgs ALL DEPENDS ${SVG_FILES})
+
 qt_add_qml_module(appifrSimulator
     URI ifrSimulator
     VERSION 1.0
     QML_FILES
         Main.qml
-	QML_FILES AttitudeIndicator.qml
-	QML_FILES VerticalScrollImage.qml
-	QML_FILES Altimeter.qml
+        AttitudeIndicator.qml
+        VerticalScrollImage.qml
+        Altimeter.qml
 
-        RESOURCES attitude_fg.png attitude_bg.png
-        RESOURCES generator.py altimeter.svg.py
-        RESOURCES altimeter_bg.svg attitude_fg.svg altimeter_hand1.svg altimeter_hand2.svg altimeter_hand3.svg altimeter_prss.svg
+    RESOURCES
+        attitude_fg.png attitude_bg.png attitude_fg.svg
+        ${SVG_GENERATOR}
+        ${SVG_RESOURCES}
+        ${SVG_SCRIPTS}
+        ${SVG_FILES}
 )
+
+add_dependencies(appifrSimulator generate_svgs)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
