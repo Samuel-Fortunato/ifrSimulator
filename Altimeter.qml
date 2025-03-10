@@ -6,6 +6,8 @@ Item {
     readonly property int size: { Math.min( width, height ) }
     property real pressure: 1013.2
     property real hundreds: 1.5
+    property real thousands: 4
+    property real ten_thousands: 1
 
     Item {
         id: prss_const
@@ -56,6 +58,24 @@ Item {
             anchors.fill: parent
 
             rotation: hundreds * (360/10)
+        }
+
+        Image {
+            id: hand2
+            source: "svg/altimeter_hand2.svg"
+
+            anchors.fill: parent
+
+            rotation: thousands * (360/10)
+        }
+
+        Image {
+            id: hand3
+            source: "svg/altimeter_hand3.svg"
+
+            anchors.fill: parent
+
+            rotation: ten_thousands * (360/10)
         }
     }
 }

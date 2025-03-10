@@ -16,13 +16,18 @@ qt_add_executable(appifrSimulator
 set(SVG_DIRECTORY svg)
 set(SVG_GENERATOR ${SVG_DIRECTORY}/generator.py)
 set(SVG_RESOURCES
-    ${SVG_DIRECTORY}/altimeter_constants.py
+    ${SVG_DIRECTORY}/constants.py
     ${SVG_DIRECTORY}/color_palette.py
 )
 set(SVG_SCRIPTS
     ${SVG_DIRECTORY}/altimeter_bg.svg.py
     ${SVG_DIRECTORY}/altimeter_prss.svg.py
     ${SVG_DIRECTORY}/altimeter_hand1.svg.py
+    ${SVG_DIRECTORY}/altimeter_hand2.svg.py
+    ${SVG_DIRECTORY}/altimeter_hand3.svg.py
+
+    ${SVG_DIRECTORY}/hsi_bg.svg.py
+    ${SVG_DIRECTORY}/hsi_fg.svg.py
 )
 set(SVG_FILES "")
 
@@ -48,8 +53,6 @@ foreach(SCRIPT ${SVG_SCRIPTS})
         COMMENT "Generating ${SVG_FILE} using ${SCRIPT}"
         VERBATIM
     )
-
-    message(SVG_FILES="${SVG_FILES}")
 endforeach()
 
 add_custom_target(generate_svgs ALL DEPENDS ${SVG_FILES})
@@ -69,6 +72,8 @@ qt_add_qml_module(appifrSimulator
         ${SVG_RESOURCES}
         ${SVG_SCRIPTS}
         ${SVG_FILES}
+        QML_FILES HeadingIndicator.qml
+        RESOURCES svg/hsi_bg.svg.py
 )
 
 add_dependencies(appifrSimulator generate_svgs)

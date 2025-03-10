@@ -1,7 +1,7 @@
 import svg
 import os
 
-from altimeter_constants import *
+from constants import *
 from color_palette import COLOR_PALETTE as colors
 
 prss_element_list = [

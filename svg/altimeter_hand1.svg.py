@@ -1,20 +1,26 @@
 import svg
 import os
 
-from altimeter_constants import *
+from constants import *
 from color_palette import COLOR_PALETTE as colors
 
 hand1_element_list = [
     svg.Polygon(
         points = [
-            centerX - hand1_width / 2   ,        stroke_w + big_tick_size + 2 * big_spacing + hand1_tip,
-            centerX                     ,        stroke_w + big_tick_size + 2 * big_spacing,
-            centerX + hand1_width / 2   ,        stroke_w + big_tick_size + 2 * big_spacing + hand1_tip,
-            centerX + hand1_width / 2   ,        centerY,
-            centerX - hand1_width / 2   ,        centerY,
+            centerX - hand1_width / 2    ,        centerY - hand_size,
+            centerX                      ,        centerY - hand_size - hand1_tip,
+            centerX + hand1_width / 2    ,        centerY - hand_size,
+            centerX + hand1_width / 2    ,        centerY,
+            centerX - hand1_width / 2    ,        centerY,
         ],
-        fill = "white"
-    )
+        fill = colors["instrument-hilt"],
+    ),
+    svg.Circle(
+        cx = centerX, cy = centerY, r = hand_center_radius,
+        fill = colors["instrument-bg"],
+        stroke_width = stroke_w,
+        stroke = colors["instrument-hilt"]
+    ),
 ]
 
 

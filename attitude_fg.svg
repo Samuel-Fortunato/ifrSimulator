@@ -6,10 +6,10 @@
 
 	<rect x="0" y="0" width="1000" height="1000" fill="black" mask="url(#circleMask)" />
 	
-	<rect x="250" y="470" width="230" height="20" rx="10" ry="10" fill="orange" />
-	<rect x="520" y="470" width="230" height="20" rx="10" ry="10" fill="orange" />
+	<rect x="250" y="470" width="230" height="20" rx="10" ry="10" fill="orangeRed" />
+	<rect x="520" y="470" width="230" height="20" rx="10" ry="10" fill="orangeRed" />
 	
-	<rect x="460" y="470" width="62" height="20" rx="10" ry="10" fill="orange" transform="rotate(45, 470, 480)" />
-	<rect x="520" y="470" width="62" height="20" rx="10" ry="10" fill="orange" transform="rotate(135, 530, 480)" />
+	<rect x="460" y="470" width="62" height="20" rx="10" ry="10" fill="orangeRed" transform="rotate(45, 470, 480)" />
+	<rect x="520" y="470" width="62" height="20" rx="10" ry="10" fill="orangeRed" transform="rotate(135, 530, 480)" />
 
 </svg>

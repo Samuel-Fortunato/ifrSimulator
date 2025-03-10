@@ -32,39 +32,27 @@ Window {
 
             pressure: pressure_slider.value
 
-            hundreds: hundreds_slider.value
+            hundreds: altitude_slider.value * 100
+            thousands: altitude_slider.value * 10
+            ten_thousands: altitude_slider.value
         }
 
-        Rectangle {
-            id: controller1
+        HeadingIndicator {
+            id: hsi
 
             width: parent.width / panel.columns
             height: parent.height / panel.rows
 
-            color: "grey"
+            heading: heading_slider.value
 
-            MouseArea {
-                anchors.fill: parent
-
-                drag { target: stick1; axis: Drag.XAndYAxis; smoothed: false }
-
-                Rectangle {
-                    id: stick1
-
-                    width: 30
-                    height: 30
-
-                    x: parent.width / 2
-                    y: parent.height / 2
-
-                    color: "black"
-                    radius: width / 2
-                }
+            onHeadingChanged: {
+                console.log("Heading: " + heading)
             }
         }
 
         Column {
             width: parent.width / panel.columns
+            height: parent.height / panel.columns
 
             Slider {
                 id: pressure_slider
@@ -77,14 +65,54 @@ Window {
                 to: 1067
             }
             Slider {
-                id: hundreds_slider
+                id: altitude_slider
 
                 anchors.left: parent.left
                 anchors.right: parent.right
 
                 from: 0
-                value: 1.5
-                to: 10
+                value: 1.235
+                to: 2
+            }
+            Slider {
+                id: heading_slider
+
+                anchors.left: parent.left
+                anchors.right: parent.right
+
+                from: 0
+                value: 23
+                to: 360
+
+                stepSize: 1
+            }
+
+            Rectangle {
+                id: controller1
+
+                width: parent.width
+                height: parent.height/2
+
+                color: "grey"
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    drag { target: stick1; axis: Drag.XAndYAxis; smoothed: false }
+
+                    Rectangle {
+                        id: stick1
+
+                        width: 30
+                        height: 30
+
+                        x: parent.width / 2
+                        y: parent.height / 2
+
+                        color: "black"
+                        radius: width / 2
+                    }
+                }
             }
         }
     }
