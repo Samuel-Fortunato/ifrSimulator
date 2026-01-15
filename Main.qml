@@ -12,7 +12,14 @@ Window {
 
         anchors.fill: parent
         rows: 2
-        columns: 2
+        columns: 3
+
+        AirspeedIndicator {
+            id: speed
+
+            width: parent.width / panel.columns
+            height: parent.height / panel.rows
+        }
 
         AttitudeIndicator {
             id: horizon
@@ -35,19 +42,6 @@ Window {
             hundreds: altitude_slider.value * 100
             thousands: altitude_slider.value * 10
             ten_thousands: altitude_slider.value
-        }
-
-        HeadingIndicator {
-            id: hsi
-
-            width: parent.width / panel.columns
-            height: parent.height / panel.rows
-
-            heading: heading_slider.value
-
-            onHeadingChanged: {
-                console.log("Heading: " + heading)
-            }
         }
 
         Column {
@@ -83,8 +77,6 @@ Window {
                 from: 0
                 value: 23
                 to: 360
-
-                stepSize: 1
             }
 
             Rectangle {
@@ -114,6 +106,15 @@ Window {
                     }
                 }
             }
+        }
+
+        HeadingIndicator {
+            id: hsi
+
+            width: parent.width / panel.columns
+            height: parent.height / panel.rows
+
+            heading: heading_slider.value
         }
     }
 }

@@ -22,12 +22,15 @@ set(SVG_RESOURCES
 set(SVG_SCRIPTS
     ${SVG_DIRECTORY}/altimeter_bg.svg.py
     ${SVG_DIRECTORY}/altimeter_prss.svg.py
-    ${SVG_DIRECTORY}/altimeter_hand1.svg.py
-    ${SVG_DIRECTORY}/altimeter_hand2.svg.py
-    ${SVG_DIRECTORY}/altimeter_hand3.svg.py
+
+    ${SVG_DIRECTORY}/hand1.svg.py
+    ${SVG_DIRECTORY}/hand2.svg.py
+    ${SVG_DIRECTORY}/hand3.svg.py
 
     ${SVG_DIRECTORY}/hsi_bg.svg.py
     ${SVG_DIRECTORY}/hsi_fg.svg.py
+
+    ${SVG_DIRECTORY}/airspeed_indicator_bg.svg.py
 )
 set(SVG_FILES "")
 
@@ -65,6 +68,8 @@ qt_add_qml_module(appifrSimulator
         AttitudeIndicator.qml
         VerticalScrollImage.qml
         Altimeter.qml
+        HeadingIndicator.qml
+        AirspeedIndicator.qml
 
     RESOURCES
         attitude_fg.png attitude_bg.png attitude_fg.svg
@@ -72,8 +77,6 @@ qt_add_qml_module(appifrSimulator
         ${SVG_RESOURCES}
         ${SVG_SCRIPTS}
         ${SVG_FILES}
-        QML_FILES HeadingIndicator.qml
-        RESOURCES svg/hsi_bg.svg.py
 )
 
 add_dependencies(appifrSimulator generate_svgs)

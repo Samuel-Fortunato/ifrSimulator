@@ -53,7 +53,7 @@ Item {
 
         Image {
             id: hand1
-            source: "svg/altimeter_hand1.svg"
+            source: "svg/hand1.svg"
 
             anchors.fill: parent
 
@@ -62,7 +62,7 @@ Item {
 
         Image {
             id: hand2
-            source: "svg/altimeter_hand2.svg"
+            source: "svg/hand2.svg"
 
             anchors.fill: parent
 
@@ -71,7 +71,7 @@ Item {
 
         Image {
             id: hand3
-            source: "svg/altimeter_hand3.svg"
+            source: "svg/hand3.svg"
 
             anchors.fill: parent
 

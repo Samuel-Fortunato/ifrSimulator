@@ -83,3 +83,21 @@ hsi_big_tick_number = 36
 
 hsi_marker_width = stroke_w
 hsi_marker_size = size / 16
+
+
+spd_begin = 40
+spd_end = 200
+spd_begin_angle = 45
+spd_end_angle = 315
+max_speed = 158
+max_speed_angle = spd_begin_angle + ((spd_end_angle - spd_begin_angle) / (spd_end - spd_begin)) * (max_speed - spd_begin)
+
+spd_big_tick_size = size / 10
+spd_big_spacing = 0
+spd_big_tick_number = 17
+spd_big_tick_width = stroke_w
+
+spd_small_tick_size = size / 20
+spd_small_spacing = 0
+spd_small_tick_number = 33
+spd_small_tick_width = stroke_w / 2
